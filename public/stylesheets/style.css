@@ -1,8 +1,18 @@
-body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-}
-
 a {
   color: #00B7FF;
+}
+
+.op {
+  margin-top: 20px;
+}
+
+.rad-list {
+  display: flex;
+  align-items: baseline;
+  gap: 15px;
+}
+
+.btn.group.search{
+  margin-top: -5px;
+
 }
