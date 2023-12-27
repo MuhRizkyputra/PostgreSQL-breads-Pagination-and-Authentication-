@@ -1,95 +1,58 @@
 <%- include('partials/header')%>
-  <div class="card">
-    <div class="card-header">
-      <div class="head">
-        <h1 class="text-center">PostgreSQL Bread (Browse, Read, Add, Delete)</h1>
-      </div>
-    </div>
-    <div class="card-body">
-      <form>
-        <div class="row mb-2">
-          <label for="title" class="col-sm-2 col-form-label">Title</label>
-          <div class="col-sm-10">
-            <input type="text" class="form-control" id="name" placeholder="insert your title">
-          </div>
+    <div class="card">
+        <div class="card-header">
+            <h1 class="text-center"></h1>
         </div>
-        <div class="row mb-1">
-          <label for="startdate" class="col-sm-2 col-form-label">Deadline</label>
-          <div class="col-sm-4">
-            <input type="date" class="form-control" name="startdate">
-          </div>
-          <label for="enddate" class="col-sm-2 col-form-label">
-            <p class="into">s.d.</p>
-          </label>
-          <div class="col-sm-4">
-            <input type="date" class="form-control" name="enddate">
-          </div>
+        <div class="card-header">
+            <h1 class="text-center">PostgreSQL Breads(Browse,Read,Edit,Add,Delete,Sort)</h1>
         </div>
-        <div class="row mb-2 list">
-          <legend class="col-form-label col-sm-2 pt-0 left-comp">Complete</legend>
-          <select class="form-select list-comp" aria-label="Default select example">
-            <option selected>--Select Complete--</option>
-            <option value="1">Note Yet</option>
-            <option value="2">Done</option>
-          </select>
-        </div>
-        <div class="op">  
-          <fieldset class="row mb-3">
-            <legend class="col-form-label col-sm-2 pt-0">Operation</legend>
-            <div class="col-sm-10 rad-list">
-              <div class="form-check">
-                <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="option1" checked>
-                <label class="form-check-label" for="gridRadios1">
-                  OR
+        <div class="card-body ">
+            <form action="" method="post">
+                <div class="row mb-3">
+                    <label for="tittle" class="col-sm-2 col-form-label">Tittle</label>
+                    <div class="col-sm-10">
+                        <input type="tittle" class="form-control" id="tittle" placeholder="insert your tittle">
+                    </div>
+                </div>
+               <div class="row mb-1">
+                <label for="startdate" class="col-sm-2 col-form-label">Deadline</label>
+                <div class="col-sm-4">
+                  <input type="date" class="form-control" name="startdate">
+                </div>
+                <label for="enddate" class="col-sm-2 col-form-label">
+                  <p class="into">s.d.</p>
                 </label>
+                <div class="col-sm-4">
+                  <input type="date" class="form-control" name="enddate">
+                </div>
               </div>
-              <div class="form-check">
-                <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2" value="option2">
-                <label class="form-check-label" for="gridRadios2">
-                  AND
-                </label>
-              </div>
+        <div class="row mb-3">
+            <label for="complete" class="col-sm-2 col-form-label">Complete</label>
+            <div class="col-sm-10">
+                <select class="form-select" aria-label="Default select example">
+                    <option selected>-select complete-</option>
+                    <option value="1">Done</option>
+                    <option value="2">Not Yet</option>
+                </select>
             </div>
-          </fieldset>
-        </div>
-          <div class="btn-group-search">
-              <div class="formBtm">
-                  <button class="btn btn-primary" type="submit">save</button>
-                  <a href="/" class="btn ">
-                      <button class="btn btn-warning" type="button">Back</button>
-                  </a>
-              </div>
-          </div>
-      </form>
-      <div class="line"></div>
-    </div>
-    <div class="tab-list">
-      <table>
-        <tr>
-          <th>No</th>
-          <th>Name</th>
-          <th>Height</th>
-          <th>Weight</th>
-          <th>Birth Date</th>
-          <th>Is Married</th>
-          <th>Actions</th>
-      </tr>
-      </table>
-    </div>
-    <div class="card-footer">
-      <div class="foot-form">
-        <div class="formBtm">
-          <a href="/add" class="btn ">
-            <button class="btn btn-primary" type="button">+</button>
-          </a>
-        </div>
-      </div>
-    </div>
-  </div>
-  <%- include('partials/footer')%>
+            <div class="row mb-3">
+                <label for="operation" class="col-sm-2 col-form-label">Operation</label>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                    <label class="form-check-label" for="flexRadioDefault1">
+                      OR
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
+                    <label class="form-check-label" for="flexRadioDefault2">
+                      AND
+                    </label>
+                  </div>
 
-    <!-- <div class="tbl-edit">
-      <a href="/edit" class="tombol">
-        <button class="btm-add" type="button">edit</button>
-      </a>
-    </div> -->
+            </div>
+        </div>
+        <div class="card-footer ">
+
+
+            <%- include('partials/footer')%>
