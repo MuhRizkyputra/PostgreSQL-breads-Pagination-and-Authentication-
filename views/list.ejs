@@ -1,79 +1,91 @@
 <%- include('partials/header')%>
-    <div class="card">
-        <div class="card-header">
-            <h1 class="text-center"></h1>
-        </div>
-        <div class="card-header">
-            <h1 class="text-center">PostgreSQL Breads(Browse,Read,Edit,Add,Delete,Sort)</h1>
-        </div>
-        <div class="card-body ">
-            <form action="" method="post">
-                <div class="row mb-3">
-                    <label for="tittle" class="col-sm-2 col-form-label">Tittle</label>
-                    <div class="col-sm-10">
-                        <input type="tittle" class="form-control" id="tittle" placeholder="insert your tittle">
-                    </div>
-                </div>
-               <div class="row mb-1">
-                <label for="startdate" class="col-sm-2 col-form-label">Deadline</label>
-                <div class="col-sm-4">
-                  <input type="date" class="form-control" name="startdate">
-                </div>
-                <label for="enddate" class="col-sm-2 col-form-label">
-                  <p class="into">s.d.</p>
-                </label>
-                <div class="col-sm-4">
-                  <input type="date" class="form-control" name="enddate">
-                </div>
-              </div>
-        <div class="row mb-3">
-            <label for="complete" class="col-sm-2 col-form-label">Complete</label>
-            <div class="col-sm-10">
-                <select class="form-select" aria-label="Default select example">
-                    <option selected>-select complete-</option>
-                    <option value="1">done</option>
-                    <option value="2">not yet</option>
-                </select>
-            </div>
-            <div class="row mb-3 op">
-                <label for="operation" class="col-sm-2 pt-0">Operation</label>
-                <div class="col-sm-10 rad-list">
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
-                    <label class="form-check-label" for="flexRadioDefault1">
-                      OR
-                    </label>
-                  </div>
-                  <div class="form-check">
-                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
-                    <label class="form-check-label" for="flexRadioDefault2">
-                      AND
-                    </label>
-                  </div>
-                </div>
-            </div>
-        </div>
-        <div class="btn-group-search">
-        <button type="button" class="btn btn-primary">Save</button>
-        <button type="button" class="btn btn-warning">Back</button>
+<div class="card">
+  <div class="container-ava bg-light">
+    <div class="item-ava">
+      <div class="ava">
+        <a href="/upload"><img src="images/sampelpic.jpg" alt="avatarpic" class="avatar"></a>
+        <h3>novian@gmail.com</3>
+      </div>
+      <div class="btn-out">
+        <div class="position-relative">
+          <a href="/">
+            <button type="button" class="btn btn-secondary">Secondary</button>
+          </a>
         </div>
       </div>
-</form>
-<div class="line"></div>
-<div class="tab-list">
-  <table class="table table-striped">
-    <tr>
-      <th>No</th>
-      <th>Title</th>
-      <th>Complete</th>
-      <th>Deadline</th>
-      <th>Actions</th>
-    </tr>
-  </table>
+    </div>
   </div>
-  <div class="card-footer">
-    <button class="btn btn-primary" type="button">+</button>
+    <div class="card-header">
+      <h1 class="text-center">PostgreSQL Breads(Browse,Read,Edit,Add,Delete,Sort)</h1>
+    </div>
+    <div class="card-body ">
+      <form action="" method="post">
+        <div class="row mb-3">
+          <label for="tittle" class="col-sm-2 col-form-label">Tittle</label>
+          <div class="col-sm-10">
+            <input type="tittle" class="form-control" id="tittle" placeholder="insert your tittle" />
+          </div>
+        </div>
+        <div class="row mb-1">
+          <label for="startdate" class="col-sm-2 col-form-label">Deadline</label>
+          <div class="col-sm-4">
+            <input type="date" class="form-control" name="startdate">
+          </div>
+          <label for="enddate" class="col-sm-2 col-form-label">
+            <p class="into">s.d.</p>
+          </label>
+          <div class="col-sm-4">
+            <input type="date" class="form-control" name="enddate">
+          </div>
+        </div>
+        <div class="row mb-3">
+          <label for="complete" class="col-sm-2 col-form-label">Complete</label>
+          <div class="col-sm-10">
+            <select class="form-select" aria-label="Default select example">
+              <option selected>-select complete-</option>
+              <option value="1">done</option>
+              <option value="2">not yet</option>
+            </select>
+          </div>
+          <div class="row mb-3 op">
+            <label for="operation" class="col-sm-2 pt-0">Operation</label>
+            <div class="col-sm-10 rad-list">
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                <label class="form-check-label" for="flexRadioDefault1">
+                  OR
+                </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
+                <label class="form-check-label" for="flexRadioDefault2">
+                  AND
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="btn-group-search">
+          <button type="button" class="btn btn-primary"><i class="fa-solid fa-floppy-disk"></i></button>
+          <button type="button" class="btn btn-warning"><i class="fa-solid fa-rotate-left"></i></button>
+        </div>
+    </div>
+    </form>
+    <div class="line"></div>
+    <div class="tab-list">
+      <table class="table table-striped">
+        <tr>
+          <th>No</th>
+          <th>Title</th>
+          <th>Complete</th>
+          <th>Deadline</th>
+          <th>Actions</th>
+        </tr>
+      </table>
+    </div>
+    <div class="card-footer">
+      <button class="btn btn-primary" type="button">+</button>
+    </div>
   </div>
-</div>
-</div>
-<%- include('partials/footer')%>
+  </div>
+  <%- include('partials/footer')%>
