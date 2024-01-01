@@ -5,9 +5,30 @@ const saltRounds = 10;
 
 /* GET home page. */
 module.exports = function (db) {
-  router.get('/', function (req, res, next) {
-    res.render('users/index');
+
+  router.get('/', (req, res) => {
+    res.render('users/index')
   });
+
+  router.post('/', async (req, res) => {
+
+    try {
+      const { email, password } = req.body
+      const { rows } = await db.query('SELECT * FROM users WHERE email = $1', [email])
+      const passwordMatch = bcrypt.compareSync(password, rows[0].password)
+      if (rows.length == 0) {
+        new Error(`email doesn't exist`)
+        res.redirect('/')
+      };
+      if (!passwordMatch) {
+        new Error('password wrong')
+        res.redirect('/')
+      };
+      res.redirect('/users')
+    } catch (error) {
+      console.log(error)
+    }
+  })
 
   router.get('/register', function (req, res, next) {
     console.log(req.body)
@@ -16,7 +37,7 @@ module.exports = function (db) {
 
   router.post('/register', async (req, res) => {
     const { email, password, repassword } = req.body;
-    console.log(req.body, 'INIIII')
+
     try {
       if (password !== repassword) throw new Error(`Password doesn't match`)
       const { rows } = await db.query('SELECT * FROM users WHERE email = $1', [email])

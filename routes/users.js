@@ -12,7 +12,7 @@ router.get('/edit', (req, res) => {
   res.render('edit')
 })
 
-router.get('/list', (req, res) => {
+router.get('/', (req, res) => {
   res.render('list')
 }) 
 
