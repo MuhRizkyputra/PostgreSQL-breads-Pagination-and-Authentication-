@@ -13,6 +13,7 @@
     "ejs": "~2.6.1",
     "express": "~4.16.1",
     "express-fileupload": "^1.4.3",
+    "express-session": "^1.17.3",
     "flash": "^1.1.0",
     "http-errors": "~1.6.3",
     "moment": "^2.29.4",
