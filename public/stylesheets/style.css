@@ -22,11 +22,11 @@ a {
 
 }
 
-.container.ava {
+.container-ava{
   border-bottom: 1px solid rgb(202, 202, 202);
   border-radius: 5px 5px 0px 0px;
   background-color: aqua;
-  padding-bottom: -90px !important ;
+  padding-bottom: -90px !important;
 }
 
 .ava {
@@ -46,7 +46,7 @@ a {
 .btn-out {
   display: flex;
   justify-content: flex-end;
-  transform: translateY(-1em);
+  transform: translateY(-2em);
   margin-right: 10px;
 }
 .item.ava {

@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 const bcrypt = require('bcrypt');
+const session = require('express-session');
 const saltRounds = 10;
 
 /* GET home page. */
@@ -18,11 +19,11 @@ module.exports = function (db) {
       if (rows.length == 0) {
         new Error(`email doesn't exist`)
         res.redirect('/')
-      };  
+      };
       const passBag = rows[0].password
       const passwordMatch = bcrypt.compareSync(password, passBag)
       if (!passwordMatch) {
-        new Error('password wrong')        
+        new Error('password wrong')
         res.redirect('/')
       };
       req.session.user = passBag
@@ -52,6 +53,10 @@ module.exports = function (db) {
       res.send(error.massage)
     }
 
+  })
+  router.get('/logout', function (req, res) {
+    req.session.destroy(function (err) {
+    })
   })
   return router
 }
