@@ -15,15 +15,17 @@ module.exports = function (db) {
     try {
       const { email, password } = req.body
       const { rows } = await db.query('SELECT * FROM users WHERE email = $1', [email])
-      const passwordMatch = bcrypt.compareSync(password, rows[0].password)
       if (rows.length == 0) {
         new Error(`email doesn't exist`)
         res.redirect('/')
-      };
+      };  
+      const passBag = rows[0].password
+      const passwordMatch = bcrypt.compareSync(password, passBag)
       if (!passwordMatch) {
-        new Error('password wrong')
+        new Error('password wrong')        
         res.redirect('/')
       };
+      req.session.user = passBag
       res.redirect('/users')
     } catch (error) {
       console.log(error)
