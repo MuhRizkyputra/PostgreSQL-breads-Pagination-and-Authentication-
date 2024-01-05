@@ -103,10 +103,10 @@
               <a href="/users/edit/<%= item.id %>">
                 <button class="btn btn-success" type="button"><i class="fa-solid fa-pen"></i></button>
               </a>
-              <!-- <a href="<%= isOverdue ? '#' : '/delete' + item.id %>" class="delete"
+              <a href="<%= isOverdue ? '#' : '/delete' + item.id %>" class="delete"
                 <% if (!isOverdue) { %> onclick="opendialog('<%= item.id %>', '<%= item.title %>')" <% } %>>
                 <button class="btn btn-danger" type="button"><i class="fa-solid fa-trash"></i></button>
-                </a> -->
+                </a>
             </td>
           </tr>
       <%  }) %>
