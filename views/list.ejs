@@ -78,12 +78,38 @@
     <div class="tab-list">
       <table class="table table-striped">
         <tr>
-          <th>No</th>
-          <th>Title</th>
-          <th>Complete</th>
-          <th>Deadline</th>
+          <th>No.</th>
+          <th><i class="fa-solid fa-sort"></i> Title</th>
+          <th><i class="fa-solid fa-sort"></i> Complete</th>
+          <th><i class="fa-solid fa-sort"></i> Deadline</th>
           <th>Actions</th>
         </tr>
+        <% data.forEach((item, index) => { %>
+          <% const isOverdue = new Date(item.deadline) < new Date() && !item.complete %>
+          <tr class="<%= isOverdue ? 'overdue-task' : '' %>">
+            <td>
+              <%= index + 1 + offset %>
+            </td>
+            <td>
+              <%= item.title %>
+            </td>
+            <td>
+              <%= item.complete ? 'done' : 'not yet' %>
+            </td>
+            <td>
+              <%= moment(item.deadline).format(" DD MMM YYYY HH:mm") %>
+            </td>
+            <td>
+              <a href="/users/edit/<%= item.id %>">
+                <button class="btn btn-success" type="button"><i class="fa-solid fa-pen"></i></button>
+              </a>
+              <!-- <a href="<%= isOverdue ? '#' : '/delete' + item.id %>" class="delete"
+                <% if (!isOverdue) { %> onclick="opendialog('<%= item.id %>', '<%= item.title %>')" <% } %>>
+                <button class="btn btn-danger" type="button"><i class="fa-solid fa-trash"></i></button>
+                </a> -->
+            </td>
+          </tr>
+      <%  }) %>
       </table>
     </div>
     <div class="card-footer">
