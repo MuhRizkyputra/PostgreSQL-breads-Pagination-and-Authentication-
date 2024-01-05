@@ -12,23 +12,24 @@ module.exports = function (db) {
 
   router.post('/', async (req, res) => {
 
-    try {
+     try {
       const { email, password } = req.body
       const { rows } = await db.query('SELECT * FROM users WHERE email = $1', [email])
-      
+
       if (rows.length == 0) {
-        req.flash('errorMessage' , `email doesn't exist`)
-        return res.redirect('/')
-      };
-      const passBag = rows[0].password
-      const passwordMatch = bcrypt.compareSync(password, passBag)
-      
-      if (!passwordMatch) {
-        req.flash('errorMessage','password wrong')
+        req.flash('errorMessage', `Email doesn't exist`)
         return res.redirect('/')
       };
 
-      req.session.user = { email: row[0].email, usersid: row[0].id}
+      const storedPass = rows[0].password
+      const passwordMatch = bcrypt.compareSync(password, storedPass)
+
+      if (!passwordMatch) {
+        req.flash('errorMessage', 'Password is wrong')
+        return res.redirect('/')
+      };
+
+      req.session.user = { email: rows[0].email, userid: rows[0].id }
       res.redirect('/users')
     } catch (error) {
       console.log(error)
@@ -36,13 +37,12 @@ module.exports = function (db) {
     }
   })
 
-  router.get('/register', function (req, res, next) {
-    res.render('users/register' , { errorMessage: req.flash('errorMessage'), successMessage: req.flash('successMessage') });
-  });
+  router.get('/register', (req, res) => {
+    res.render('users/register', { errorMessage: req.flash('errorMessage'), successMessage: req.flash('successMessage') })
+  })
 
   router.post('/register', async (req, res) => {
-    const { email, password, repassword } = req.body;
-
+    const { email, password, repassword } = req.body
     try {
       if (password !== repassword) {
         req.flash('errorMessage', `password doesn't match`)
@@ -51,22 +51,24 @@ module.exports = function (db) {
       }
 
       const { rows } = await db.query('SELECT * FROM users WHERE email = $1', [email])
-      console.log(rows)    
       if (rows.length > 0) {
-        req.flash('errorMessage', 'Email already exist')
+        req.flash('errorMessage', `Email already exist`)
         res.redirect('/register')
         return
-      }        
-        const hash = bcrypt.hashSync(password, saltRounds);
-        const { rows: users } = await db.query('INSERT INTO users(email, password) VALUES ($1, $2) returning *', [email, hash])
-        req.flash('successMesage',`Successfully registered, please sign in!`)
-        res.redirect('/')
+      }      
+
+      const hash = bcrypt.hashSync(password, saltRounds);
+      const { rows: users } = await db.query('INSERT INTO users(email, password) VALUES ($1, $2) returning *', [email, hash])
+      req.flash('successMessage', `Successfully registered, please sign in!`)
+      res.redirect('/')
     } catch (error) {
-      res.flash('errorMessage', `An error occured while processing data, please try again`)
+      req.flash('errorMessage', `An error occured while processing data, please try again`)
       res.redirect('/register')
     }
 
   })
+
+
   router.get('/logout', function (req, res) {
     req.session.destroy(function (err) {
     })

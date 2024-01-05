@@ -1,10 +1,9 @@
-<% if(successInfo.length >0 ){%>
-    <div class="alert alert-success text-center" role="alert">
-        <%= successInfo%>
+<% if(successMessage.length> 0 >0 ){%>
+  <div class="alert alert-success  text-center" role="alert">
+      <%= successMessage%>
+  </div>
+  <%} else if(errorMessage.length>0 ){%>
+      <div class="alert alert-danger text-center" role="alert">
+          <%= errorMessage%>
       </div>
-      <%} elfe if(failedInfo.length >0 ){%>
-        <div class="alert alert-danger text-center" role="alert">
-            <%= failedInfo%>
-          </div>
       <%}%>
-      
