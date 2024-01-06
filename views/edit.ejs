@@ -8,20 +8,24 @@
         <div class="row mb-3">
           <label for="tittle" class="col-sm-2 col-form-label">Tittle</label>
           <div class="col-sm-10">
-            <input type="tittle" class="form-control " id="tittle" placeholder="insert ypur tittle">
+            <input type="tittle" class="form-control " id="tittle" placeholder="insert ypur tittle"
+              value="<%= data[0].title%>" required>
           </div>
         </div>
         <div class="row mb-3">
-          <label for="startdate" class="col-sm-2 col-form-label">Deadline</label>
+          <label class="col-sm-2 col-form-label">Deadline</label>
           <div class="col-sm-10">
-            <input type="date" class="form-control" name="startdate">
+            <div class="input-group-date" id="datepicker">
+              <input type="datetime-local" class="form-control" name="startdate"
+                value="<%= moment(data[0].deadline).format('YYYY-MM-DD HH:mm')%>" required>
+            </div>
           </div>
         </div>
         <div class="row mb-3">
           <legend class="col-form-label col-sm pt-0">Complete</legend>
           <div class="col-sm-10">
             <div class="form-check">
-              <input class="form-check-input" type="checkbox" id="gridCheck1">
+              <input class="form-check-input" type="checkbox" id="gridCheck1" <%=data[0].completed ? 'checked' :'' %>>
               <label class="form-check-label" for="gridCheck1">
                 Done
               </label>
