@@ -21,17 +21,4 @@
             </div>
         </div>
     </div>
-    <script>
-        //             document.getElementById('avatar').onchange = function () {
-        //   var src = URL.createObjectURL(this.avatar[0])
-        //   document.getElementById('preview').src = src
-        // }
-        document.getElementById('avatar').addEventListener('change', function (event) {
-            let reader = new FileReader();
-            reader.onload = function (e) {
-                document.getElementById('preview').src = e.target.result;
-            };
-            reader.readAsDataURL(event.target.files[0]);
-        });
-    </script>
 <%- include('partials/footer')%>

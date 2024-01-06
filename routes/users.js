@@ -9,8 +9,8 @@ const { title } = require('process');
 
 module.exports = function (db) {
 
-  router.get('/', isLoggedIn , async (req, res) => {
-    
+  router.get('/', isLoggedIn, async (req, res) => {
+
     const { page = 1, title, startdate, enddate, complete, type_search, sort } = req.query;
     const limit = 5
     const offset = (page - 1) * limit
@@ -43,50 +43,52 @@ module.exports = function (db) {
 
   router.get('/edit/:id', isLoggedIn, (req, res) => {
     const id = req.params.id
-    db.query('SELECT * FROM todos WHERE id = $1' , [id], (err,{ rows : data}) => {
+    db.query('SELECT * FROM todos WHERE id = $1', [id], (err, { rows: data }) => {
       if (err) return res.send(err)
-      res.render('edit', {data, moment})
+      res.render('edit', { data, moment })
     })
   })
 
-  router.post('/edit/:id' , isLoggedIn, (req, res) => {
+  router.post('/edit/:id', isLoggedIn, (req, res) => {
     const id = req.params.id
-    const {title, deadline , complete} = req.body
-    db.query('UPDATE todos SET title = $1 , complete = $2 , deadline = $3 WHERE id = $4' , [title, Boolean(complete), deadline, id], (err,data) => {
-      if(err) return res.send(err)
+    const { title, deadline, complete } = req.body
+    db.query('UPDATE todos SET title = $1 , complete = $2 , deadline = $3 WHERE id = $4', [title, Boolean(complete), deadline, id], (err, data) => {
+      if (err) return res.send(err)
       res.redirect('/users')
     })
   })
-
-
-
-  router.get('/upload', isLoggedIn, async (req, res) => {
-    const { rows: profil } = await db.query(`SELECT * FROM "users" WHERE id = $1`, [req.session.user.userid])
-    res.render('/upload', { avatar: profil[0].avatar })
-  })
-  router.post('/upload', isLoggedIn, (req, res) => {
-    if (!req.files || Object.keys(req.files).length === 0) {
-      return res.status(400).send('No files were upload.');
-    }
-    const avatar = req.files.avatar;
-    const fileName = `${Date.now()}-${avatar.name}`
-    uploadPath = path.join(__dirname, '..', 'public', 'images', fileName);
-
-    avatar.mv(uploadPath, async function (err) {
-      if (err)
-        return res.status(500).send(err);
-      avatar.mv(uploadPath, async function (err) {
-        if (err)
-          return res.status(500).send(err);
-        try {
-          const { rows } = await db.query('UPDATE users SET avatar = $1 WHERE id = $2', [fileName, req.session.user.userid])
-          res.redirect('/users')
-        } catch (err) {
-          res.send(err)
-        }
-      });
+  router.get('/delete/:index', isLoggedIn, (req, res) => {
+    const index = req.params.index;
+    db.query(`DELETE FROM todos WHERE id = $1`, [index], (err) => {
+      if (err) res.send(err)
+      else res.redirect('/users')
     })
-  });
+  })
+
+  router.get('/upload', isLoggedIn, (req, res) => {
+    res.render('upload')
+  })
+
+
+  // router.post('/upload', function (req, res) {
+  //   let sampleFile;
+  //   let uploadPath;
+
+  //   if (!req.files || Object.keys(req.files).length === 0) {
+  //     return res.status(400).send('No files were uploaded.');
+  //   }
+
+  //   sampleFile = req.files.avatar;
+  //   uploadPath = path.join(__dirname, '..', 'public', 'images', sampleFile.name)
+  //   // console.log(uploadPath)
+
+  //   sampleFile.mv(uploadPath, function (err) {
+  //     if (err)
+  //       return res.status(500).send(err);
+
+  //     res.send('File uploaded!');
+  //   });
+  // });
 
   return router
 }

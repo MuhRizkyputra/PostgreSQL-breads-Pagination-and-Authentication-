@@ -4,7 +4,9 @@
       <div class="item-ava">
         <div class="ava">
           <a href="users/upload"><img src="images/avatar.png" alt="avatarpic" class="avatar"></a>
-          <h3>wili@gmail.com</h3>
+          <h1>
+            <%= profil.email%>
+        </h1>
         </div>
         <div class="btn-out">
           <div class="position-relative">
@@ -84,39 +86,68 @@
           <th><i class="fa-solid fa-sort"></i> Deadline</th>
           <th>Actions</th>
         </tr>
-        <% data.forEach((item, index) => { %>
-          <% const isOverdue = new Date(item.deadline) < new Date() && !item.complete %>
-          <tr class="<%= isOverdue ? 'overdue-task' : '' %>">
-            <td>
-              <%= index + 1 + offset %>
-            </td>
-            <td>
-              <%= item.title %>
-            </td>
-            <td>
-              <%= item.complete ? 'done' : 'not yet' %>
-            </td>
-            <td>
-              <%= moment(item.deadline).format(" DD MMM YYYY HH:mm") %>
-            </td>
-            <td>
-              <a href="/users/edit/<%= item.id %>">
-                <button class="btn btn-success" type="button"><i class="fa-solid fa-pen"></i></button>
-              </a>
-              <a href="<%= isOverdue ? '#' : '/delete' + item.id %>" class="delete"
-                <% if (!isOverdue) { %> onclick="opendialog('<%= item.id %>', '<%= item.title %>')" <% } %>>
-                <button class="btn btn-danger" type="button"><i class="fa-solid fa-trash"></i></button>
-                </a>
-            </td>
-          </tr>
-      <%  }) %>
-      </table>
+      </thead>
+      <tbody>
+        <%data.forEach((item,index)=>{ %>
+          <%if(new Date(`${item.deadline}`)< new Date()&& !item.complete){ %>
+            <tr>
+              <td style="background-color: #F75352; color: white;">
+                <%= index +1 + offset%>
+              </td>
+              <td style="background-color: #F75352; color: white;">
+                <%= item.title %>
+              </td>
+              <td style="background-color: #F75352; color: white;">
+                <%= item.complete ? "Done" : "Not Yet" %>
+              </td>
+              <td style="background-color: #F75352; color: white;">
+                <%= moment(item.deadline).format(" DD MMM YYYY HH:mm")%>
+              </td>
+              <td style="background-color: #F75352; color: white;">
+                <a href="/users/edit/<%= item.id%> " class="btn btn-success update"><i
+                    class="fa-solid fa-pencil"></i></a>&nbsp <a href="/users/delete/<%= item.id%>"
+                  class="btn btn-danger delete" onclick="return confirmation('<%= item.title%>')"><i
+                    class="fa-solid fa-trash"></i></a>
+
+              </td>
+
+            </tr>
+            <%} else {%>
+              <tr>
+                <td>
+                  <%= index +1 + offset%>
+                </td>
+                <td>
+                  <%= item.title %>
+                </td>
+                <td>
+                  <%= item.complete ? "Done" : "Not Yet" %>
+                </td>
+                <td>
+                  <%= moment(item.deadline).format(" DD MMM YYYY HH:mm")%>
+                </td>
+                <td>
+                  <a href="/users/edit/<%= item.id%> " class="btn btn-success "><i class="fa-solid fa-pencil"></i></a>&nbsp
+                  <a href="#" class="btn btn-danger" onclick="opendialog(`<%= item.id%>` , `<%= item.title%>`)"><i
+                      class="fa-solid fa-trash"></i></a>
+
+                </td>
+
+              </tr>
+              <% }}) %>
+      </tbody>
+    </table>
     </div>
     <div class="card-footer">
       <a href="users/add">
-        <button class="btn btn-primary" type="button">+</button>
+        <button class="btn btn-primary" type="button"><i class="fa-solid fa-plus"></i></button>
       </a>
     </div>
   </div>
   </div>
+  <script>
+    function confirmation(name) {
+      return confirm(`Apakah kamu yakin akan menghapus data '${name}' ?`)
+    }
+  </script>
   <%- include('partials/footer')%>
