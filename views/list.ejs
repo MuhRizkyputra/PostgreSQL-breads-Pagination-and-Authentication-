@@ -128,7 +128,7 @@
                 </td>
                 <td>
                   <a href="/users/edit/<%= item.id%> " class="btn btn-success "><i class="fa-solid fa-pencil"></i></a>&nbsp
-                  <a href="#" class="btn btn-danger" onclick="opendialog(`<%= item.id%>` , `<%= item.title%>`)"><i
+                  <a href="#" class="btn btn-warning" onclick="opendialog(`<%= item.id%>` , `<%= item.title%>`)"><i
                       class="fa-solid fa-trash"></i></a>
 
                 </td>
@@ -145,9 +145,22 @@
     </div>
   </div>
   </div>
-  <script>
-    function confirmation(name) {
-      return confirm(`Apakah kamu yakin akan menghapus data '${name}' ?`)
-    }
-  </script>
+
+    <div id="deleteConfirm" class="modal-delete" >
+      <!-- Modal content -->
+      <div class="delete-content">
+          <div class="delete-header">
+              <h4>Delete Confirmation</h4>
+         <span class="close" onclick="closeDialog()">&times;</span></div>
+         <p id="dialog"></p>
+         <div class="delete-footer">
+          <button class="no" onclick="closeDialog()">No</button>
+         <a href="#" id="confirmed">Yes</a>
+      </div>
+      </div>
+  </div>
+</div>
+
+</body>
+
   <%- include('partials/footer')%>
