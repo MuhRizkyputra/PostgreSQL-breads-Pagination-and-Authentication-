@@ -25,7 +25,7 @@
           <legend class="col-form-label col-sm pt-0">Complete</legend>
           <div class="col-sm-10">
             <div class="form-check">
-              <input class="form-check-input" type="checkbox" id="gridCheck1" <%=data[0].completed ? 'checked' :'' %>>
+              <input class="form-check-input" type="checkbox" id="gridCheck1" name="complete" <%=data[0].completed ? 'checked' :'' %>>
               <label class="form-check-label" for="gridCheck1">
                 Done
               </label>
@@ -35,7 +35,7 @@
         <div class="card-footer">
           <button type="submit" class="btn btn-primary"><i class="fa-solid fa-floppy-disk"></i></button>
           <a href="/users">
-            <button type="button" class="btn btn-warning"><i class="fa-solid fa-rotate-left"></i></button>
+            <button class="btn btn-warning" type="button"><i class="fa-solid fa-rotate-left"></i></button>
           </a>
         </div>
       </form>

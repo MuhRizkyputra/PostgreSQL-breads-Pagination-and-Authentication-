@@ -68,9 +68,9 @@ module.exports = function (db) {
         res.redirect('/users')
       })
     })
-  router.get('/delete/:index', isLoggedIn, (req, res) => {
-    const index = req.params.index;
-    db.query(`DELETE FROM todos WHERE id = $1`, [index], (err) => {
+  router.get('/delete/:id', isLoggedIn, (req, res) => {
+    const id = req.params.id;
+    db.query(`DELETE FROM todos WHERE id = $1`, [id], (err) => {
       if (err) res.send(err)
       else res.redirect('/users')
     })

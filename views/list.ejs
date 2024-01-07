@@ -106,7 +106,7 @@
                 <td style="background-color: #F75352; color: white;">
                   <a href="/users/edit/<%= item.id%> " class="btn btn-success update"><i
                       class="fa-solid fa-pencil"></i></a>&nbsp <a href="/users/delete/<%= item.id%>"
-                    class="btn btn-danger delete" onclick="return confirmation('<%= item.title%>')"><i
+                    class="btn btn-danger delete" onclick="return on(`<%= item.id%>` , `<%= item.title%>`)"><i
                       class="fa-solid fa-trash"></i></a>
 
                 </td>
@@ -129,7 +129,7 @@
                   <td>
                     <a href="/users/edit/<%= item.id%> " class="btn btn-success "><i
                         class="fa-solid fa-pencil"></i></a>&nbsp
-                    <a href="#" class="btn btn-warning" onclick="opendialog(`<%= item.id%>` , `<%= item.title%>`)"><i
+                    <a href="/users/delete/<%= item.id%>" class="btn btn-danger" onclick="return on(`<%= item.id%>` , `<%= item.title%>`)"><i
                         class="fa-solid fa-trash"></i></a>
 
                   </td>
@@ -146,7 +146,6 @@
     </div>
   </div>
   </div>
-
+  <%- include('partials/delete-confirm')%>
   </body>
-
   <%- include('partials/footer')%>
