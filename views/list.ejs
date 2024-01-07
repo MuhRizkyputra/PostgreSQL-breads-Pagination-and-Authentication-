@@ -6,7 +6,7 @@
           <a href="users/upload"><img src="images/avatar.png" alt="avatarpic" class="avatar"></a>
           <h1>
             <%= profil.email%>
-        </h1>
+          </h1>
         </div>
         <div class="btn-out">
           <div class="position-relative">
@@ -86,57 +86,58 @@
           <th><i class="fa-solid fa-sort"></i> Deadline</th>
           <th>Actions</th>
         </tr>
-      </thead>
-      <tbody>
-        <%data.forEach((item,index)=>{ %>
-          <%if(new Date(`${item.deadline}`)< new Date()&& !item.complete){ %>
-            <tr>
-              <td style="background-color: #F75352; color: white;">
-                <%= index +1 + offset%>
-              </td>
-              <td style="background-color: #F75352; color: white;">
-                <%= item.title %>
-              </td>
-              <td style="background-color: #F75352; color: white;">
-                <%= item.complete ? "Done" : "Not Yet" %>
-              </td>
-              <td style="background-color: #F75352; color: white;">
-                <%= moment(item.deadline).format(" DD MMM YYYY HH:mm")%>
-              </td>
-              <td style="background-color: #F75352; color: white;">
-                <a href="/users/edit/<%= item.id%> " class="btn btn-success update"><i
-                    class="fa-solid fa-pencil"></i></a>&nbsp <a href="/users/delete/<%= item.id%>"
-                  class="btn btn-danger delete" onclick="return confirmation('<%= item.title%>')"><i
-                    class="fa-solid fa-trash"></i></a>
-
-              </td>
-
-            </tr>
-            <%} else {%>
+        </thead>
+        <tbody>
+          <%data.forEach((item,index)=>{ %>
+            <%if(new Date(`${item.deadline}`)< new Date()&& !item.complete){ %>
               <tr>
-                <td>
+                <td style="background-color: #F75352; color: white;">
                   <%= index +1 + offset%>
                 </td>
-                <td>
+                <td style="background-color: #F75352; color: white;">
                   <%= item.title %>
                 </td>
-                <td>
+                <td style="background-color: #F75352; color: white;">
                   <%= item.complete ? "Done" : "Not Yet" %>
                 </td>
-                <td>
+                <td style="background-color: #F75352; color: white;">
                   <%= moment(item.deadline).format(" DD MMM YYYY HH:mm")%>
                 </td>
-                <td>
-                  <a href="/users/edit/<%= item.id%> " class="btn btn-success "><i class="fa-solid fa-pencil"></i></a>&nbsp
-                  <a href="#" class="btn btn-warning" onclick="opendialog(`<%= item.id%>` , `<%= item.title%>`)"><i
+                <td style="background-color: #F75352; color: white;">
+                  <a href="/users/edit/<%= item.id%> " class="btn btn-success update"><i
+                      class="fa-solid fa-pencil"></i></a>&nbsp <a href="/users/delete/<%= item.id%>"
+                    class="btn btn-danger delete" onclick="return confirmation('<%= item.title%>')"><i
                       class="fa-solid fa-trash"></i></a>
 
                 </td>
 
               </tr>
-              <% }}) %>
-      </tbody>
-    </table>
+              <%} else {%>
+                <tr>
+                  <td>
+                    <%= index +1 + offset%>
+                  </td>
+                  <td>
+                    <%= item.title %>
+                  </td>
+                  <td>
+                    <%= item.complete ? "Done" : "Not Yet" %>
+                  </td>
+                  <td>
+                    <%= moment(item.deadline).format(" DD MMM YYYY HH:mm")%>
+                  </td>
+                  <td>
+                    <a href="/users/edit/<%= item.id%> " class="btn btn-success "><i
+                        class="fa-solid fa-pencil"></i></a>&nbsp
+                    <a href="#" class="btn btn-warning" onclick="opendialog(`<%= item.id%>` , `<%= item.title%>`)"><i
+                        class="fa-solid fa-trash"></i></a>
+
+                  </td>
+
+                </tr>
+                <% }}) %>
+        </tbody>
+      </table>
     </div>
     <div class="card-footer">
       <a href="users/add">
@@ -146,21 +147,6 @@
   </div>
   </div>
 
-    <div id="deleteConfirm" class="modal-delete" >
-      <!-- Modal content -->
-      <div class="delete-content">
-          <div class="delete-header">
-              <h4>Delete Confirmation</h4>
-         <span class="close" onclick="closeDialog()">&times;</span></div>
-         <p id="dialog"></p>
-         <div class="delete-footer">
-          <button class="no" onclick="closeDialog()">No</button>
-         <a href="#" id="confirmed">Yes</a>
-      </div>
-      </div>
-  </div>
-</div>
-
-</body>
+  </body>
 
   <%- include('partials/footer')%>
