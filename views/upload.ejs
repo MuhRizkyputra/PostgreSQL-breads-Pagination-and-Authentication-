@@ -12,6 +12,14 @@
                             <input type="file" class="form-control" id="avatar" name="avatar">
                         </div>
                     </div>
+                    <div class="row mb-3">
+                            <label for="title" class="col-sm-2 col-form-label">Preview</label>
+                            <div class="col-sm-10">
+                                <img id="avatarImg" src="<%= pp? `../images/${pp}` : `../images/avatar.png` %>"
+                                    alt="avatar" class="preview" />
+                            </div>
+                        </div>
+                    </div>
                     <div class="card-footer">
                         <div class="btn-group-search">
                             <button type="submit" class="btn btn-primary" value="upload"><i
@@ -24,4 +32,12 @@
                 </form>
             </div>
     </div>
+    <script>
+        avatar.onchange = () => {
+            const [file] = avatar.files;
+            if (file) {
+                avatarImg.src = URL.createObjectURL(file)
+            }
+        }
+    </script>
     <%- include('partials/footer')%>

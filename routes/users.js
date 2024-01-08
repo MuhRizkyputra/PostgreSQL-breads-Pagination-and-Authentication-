@@ -52,16 +52,6 @@ module.exports = function (db) {
   router.post('/edit/:id', isLoggedIn, (req, res) => {
     const id = req.params.id
     const { title, deadline, complete } = req.body
-
-    if (!title || !deadline) {
-      return res.status(400).send('Title and deadline are required');
-    }
-
-    // Validasi deadline jika diperlukan (gunakan format yang sesuai dengan kebutuhan aplikasi Anda)
-    const isValidDeadline = moment(deadline, 'YYYY-MM-DD HH:mm', true).isValid();
-    if (!isValidDeadline) {
-      return res.status(400).send('Invalid deadline format');
-    }
     
       db.query('UPDATE todos SET title = $1 , complete = $2 , deadline = $3 WHERE id = $4', [title, Boolean(complete), deadline, id], (err, data) => {
         if (err) return res.send(err)
