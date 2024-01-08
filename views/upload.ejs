@@ -3,22 +3,40 @@
         <div class="card-header">
             <h1 class="text-center">Change Avatar</h1>
         </div>
-        <div class="card-body">
-            <form action="" method="post">
-                <div class="row mb-3">
-                    <label for="tittle" class="col-sm-2 col-form-label">Avatar</label>
-                    <div class="col-sm-10">
-                        <input type="file" class="form-control" name="avatar">
+        <form ref="uploadForm" id="uploadForm" action="/users/upload" method="post" enctype="multipart/form-data">
+            <div class="card-body">
+                <form action="" method="post">
+                    <div class="row mb-3">
+                        <label for="tittle" class="col-sm-2 col-form-label">Avatar</label>
+                        <div class="col-sm-10">
+                            <input type="file" class="form-control" name="avatar">
+                        </div>
                     </div>
-                </div>
-        </div>
-        <div class="card-footer">
-            <div class="btn-group-search">
-                <button type="button" class="btn btn-primary"><i class="fa-solid fa-floppy-disk"></i></button>
-                <a href="/users">
-                    <button type="button" class="btn btn-warning"><i class="fa-solid fa-rotate-left"></i></button>
-                </a>
+                    <div class="row mb-3">
+                        <label for="title" class="col-sm-2 col-form-label">Preview</label>
+                        <div class="col-sm-10">
+                            <img id="avatarImg" src="<%= preAvatar? `../images/${preAvatar}` : `../images/avatar.png`%>"
+                                alt="avatar" class="preview" />
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <div class="btn-group-search">
+                            <button type="submit" class="btn btn-primary" value="upload"><i
+                                    class="fa-solid fa-floppy-disk"></i></button>
+                            <a href="/users">
+                                <button type="button" class="btn btn-warning"><i
+                                        class="fa-solid fa-rotate-left"></i></button>
+                            </a>
+                        </div>
+                </form>
             </div>
-        </div>
     </div>
-<%- include('partials/footer')%>
+    <script>
+        avatar.onchange = () => {
+          const [file] = avatar.files;
+          if (file) {
+            avatarImg.src = URL.createObjectURL(file);
+          }
+        };
+      </script>
+    <%- include('partials/footer')%>
