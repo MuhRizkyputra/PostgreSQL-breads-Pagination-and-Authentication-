@@ -3,20 +3,13 @@
         <div class="card-header">
             <h1 class="text-center">Change Avatar</h1>
         </div>
-        <form ref="uploadForm" id="uploadForm" action="/users/upload" method="post" enctype="multipart/form-data">
+        <form ref="uploadForm" id="uploadForm" action="" method="post" enctype="multipart/form-data">
             <div class="card-body">
                 <form action="" method="post">
                     <div class="row mb-3">
-                        <label for="tittle" class="col-sm-2 col-form-label">Avatar</label>
+                        <label for="avatar" class="col-sm-2 col-form-label">Avatar</label>
                         <div class="col-sm-10">
-                            <input type="file" class="form-control" name="avatar">
-                        </div>
-                    </div>
-                    <div class="row mb-3">
-                        <label for="title" class="col-sm-2 col-form-label">Preview</label>
-                        <div class="col-sm-10">
-                            <img id="avatarImg" src="<%= preAvatar? `../images/${preAvatar}` : `../images/avatar.png`%>"
-                                alt="avatar" class="preview" />
+                            <input type="file" class="form-control" id="avatar" name="avatar">
                         </div>
                     </div>
                     <div class="card-footer">
@@ -31,12 +24,4 @@
                 </form>
             </div>
     </div>
-    <script>
-        avatar.onchange = () => {
-          const [file] = avatar.files;
-          if (file) {
-            avatarImg.src = URL.createObjectURL(file);
-          }
-        };
-      </script>
     <%- include('partials/footer')%>

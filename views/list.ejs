@@ -3,7 +3,7 @@
     <div class="container-ava bg-light">
       <div class="item-ava">
         <div class="ava">
-          <a href="users/upload"><img src="images/avatar.png" alt="avatarpic" class="avatar"></a>
+          <a href="users/upload"><img src="<%= profil.avatar ? `/images/${profil.avatar}` : `../images/avatar.png` %>" alt="avatar" class="avatar"></a>
           <h2>
             <%= profil.email%>
           </h2>

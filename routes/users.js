@@ -76,28 +76,26 @@ module.exports = function (db) {
     })
   })
 
-  router.get('/upload', isLoggedIn, (req, res) => {
-    res.render('upload')
+  router.get('/upload', isLoggedIn, async (req, res) => {
+    const { rows: profil } = await db.query (`SELECT * FROM users WHERE id = $1` , [req.session.user.userid])
+    res.render('upload', { pp: profil[0].avatar})
   })
 
-
-  router.post('/upload', function (req, res) {
-    let sampleFile;
-    let uploadPath;
-
+  router.post('/upload', isLoggedIn, function(req, res)  {
+    
     if (!req.files || Object.keys(req.files).length === 0) {
       return res.status(400).send('No files were uploaded.');
-    }
+    } 
+  
+    const avatar = req.files.avatar;
+    const fileName = `${Date.now()}-${avatar.name}` 
+    uploadPath = path.join(__dirname ,'..','public', 'images' ,fileName);
 
-    sampleFile = req.files.avatar;
-    uploadPath = path.join(__dirname, '..', 'public', 'images', sampleFile.name)
-    // console.log(uploadPath)
-
-    sampleFile.mv(uploadPath, function (err) {
+    avatar.mv(uploadPath, async function(err) {
       if (err)
         return res.status(500).send(err);
-
-      res.send('File uploaded!');
+       const{ rows } = await db.query(`UPDATE users SET avatar = $1 WHERE id = $2`, [fileName, req.session.user.userid])
+        res.redirect('/users')         
     });
   });
 
