@@ -1,153 +1,156 @@
-<%- include('partials/header')%>
-<div class="container-md rounded-2 mt-2">
-  <div class="card">
-    <div class="container-ava bg-light">
-      <div class="item-ava">
-        <div class="ava">
-          <a href="users/upload"><img src="<%= profil.avatar ? `/images/${profil.avatar}` : `../images/avatar.png` %>" alt="avatar" class="avatar"></a>
-          <h2>
-            <%= profil.email%>
-          </h2>
-        </div>
-        <div class="btn-out">
-          <div class="position-relative">
-            <a href="/">
-              <button type="button" class="btn btn-secondary"><i class="fa-solid fa-right-from-bracket"></i>Sign
-                Out</button>
-            </a>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="card-header head-idx">
-      <div class="head">
-        <h1 class="text-center">PostgreSQL Breads(Browse,Read,Edit,Add,Delete,Sort)</h1>
-      </div>
-    </div>
-    <div class="card-body ">
-      <form action="" method="post">
-        <div class="row mb-3">
-          <label for="tittle" class="col-sm-2 col-form-label">Tittle</label>
-          <div class="col-sm-10">
-            <input type="tittle" class="form-control" id="tittle" placeholder="insert your tittle" />
-          </div>
-        </div>
-        <div class="row mb-1">
-          <label for="startdate" class="col-sm-2 col-form-label">Deadline</label>
-          <div class="col-sm-4">
-            <input type="date" class="form-control" name="startdate">
-          </div>
-          <label for="enddate" class="col-sm-2 col-form-label">
-            <p class="into">s.d.</p>
-          </label>
-          <div class="col-sm-4">
-            <input type="date" class="form-control" name="enddate">
-          </div>
-        </div>
-        <div class="row mb-3">
-          <label for="complete" class="col-sm-2 col-form-label">Complete</label>
-          <div class="col-sm-10">
-            <select class="form-select" aria-label="Default select example">
-              <option selected>-select complete-</option>
-              <option value="1">done</option>
-              <option value="2">not yet</option>
-            </select>
-          </div>
-          <div class="row mb-3 op">
-            <label for="operation" class="col-sm-2 pt-0">Operation</label>
-            <div class="col-sm-10 rad-list">
-              <div class="form-check">
-                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
-                <label class="form-check-label" for="flexRadioDefault1">
-                  OR
-                </label>
-              </div>
-              <div class="form-check">
-                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
-                <label class="form-check-label" for="flexRadioDefault2">
-                  AND
-                </label>
+  <%- include('partials/header')%>
+    <div class="container-md rounded-2 mt-2">
+      <div class="card">
+        <div class="container-ava bg-light">
+          <div class="item-ava">
+            <div class="ava">
+              <a href="users/upload"><img src="<%= profil.avatar ? `/images/${profil.avatar}` : `../images/avatar.png` %>"
+                  alt="avatar" class="avatar"></a>
+              <h2>
+                <%= profil.email%>
+              </h2>
+            </div>
+            <div class="btn-out">
+              <div class="position-relative">
+                <a href="/">
+                  <button type="button" class="btn btn-secondary"><i class="fa-solid fa-right-from-bracket"></i>Sign
+                    Out</button>
+                </a>
               </div>
             </div>
           </div>
         </div>
-        <div class="btn-group-search">
-          <button type="button" class="btn btn-primary"><i class="fa-solid fa-floppy-disk"></i></button>
-          <button type="button" class="btn btn-warning"><i class="fa-solid fa-rotate-left"></i></button>
+        <div class="card-header head-idx">
+          <div class="head">
+            <h1 class="text-center">PostgreSQL Breads(Browse,Read,Edit,Add,Delete,Sort)</h1>
+          </div>
         </div>
+        <div class="card-body ">
+          <form action="" method="post">
+            <div class="row mb-3">
+              <label for="tittle" class="col-sm-2 col-form-label">Tittle</label>
+              <div class="col-sm-10">
+                <input type="tittle" class="form-control" id="tittle" placeholder="insert your tittle" />
+              </div>
+            </div>
+            <div class="row mb-1">
+              <label for="startdate" class="col-sm-2 col-form-label">Deadline</label>
+              <div class="col-sm-4">
+                <input type="date" class="form-control" name="startdate">
+              </div>
+              <label for="enddate" class="col-sm-2 col-form-label">
+                <p class="into">s.d.</p>
+              </label>
+              <div class="col-sm-4">
+                <input type="date" class="form-control" name="enddate">
+              </div>
+            </div>
+            <div class="row mb-3">
+              <label for="complete" class="col-sm-2 col-form-label">Complete</label>
+              <div class="col-sm-10">
+                <select class="form-select" aria-label="Default select example">
+                  <option selected>-select complete-</option>
+                  <option value="1">done</option>
+                  <option value="2">not yet</option>
+                </select>
+              </div>
+              <div class="row mb-3 op">
+                <label for="operation" class="col-sm-2 pt-0">Operation</label>
+                <div class="col-sm-10 rad-list">
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                    <label class="form-check-label" for="flexRadioDefault1">
+                      OR
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
+                    <label class="form-check-label" for="flexRadioDefault2">
+                      AND
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="btn-group-search">
+              <button type="button" class="btn btn-primary"><i class="fa-solid fa-floppy-disk"></i></button>
+              <button type="button" class="btn btn-warning"><i class="fa-solid fa-rotate-left"></i></button>
+            </div>
+        </div>
+        </form>
+        <div class="line"></div>
+        <div class="tab-list">
+          <table class="table table-striped">
+            <tr>
+              <th>No.</th>
+              <th><i class="fa-solid fa-sort"></i> Title</th>
+              <th><i class="fa-solid fa-sort"></i> Complete</th>
+              <th><i class="fa-solid fa-sort"></i> Deadline</th>
+              <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+              <%data.forEach((item,index)=>{ %>
+                <%if(new Date(`${item.deadline}`)< new Date()&& !item.complete){ %>
+                  <tr>
+                    <td style="background-color: #F75352; color: white;">
+                      <%= index +1 + offset%>
+                    </td>
+                    <td style="background-color: #F75352; color: white;">
+                      <%= item.title %>
+                    </td>
+                    <td style="background-color: #F75352; color: white;">
+                      <%= item.complete ? "Done" : "Not Yet" %>
+                    </td>
+                    <td style="background-color: #F75352; color: white;">
+                      <%= moment(item.deadline).format(" DD MMM YYYY HH:mm")%>
+                    </td>
+                    <td style="background-color: #F75352; color: white;">
+                      <a href="/users/edit/<%= item.id%> " class="btn btn-success update"><i
+                          class="fa-solid fa-pencil"></i></a>&nbsp <a href="/users/delete/<%= item.id%>"
+                        class="btn btn-danger delete" onclick="return on(`<%= item.id%>` , `<%= item.title%>`)"><i
+                          class="fa-solid fa-trash"></i></a>
+
+                    </td>
+
+                  </tr>
+                  <%} else {%>
+                    <tr>
+                      <td>
+                        <%= index +1 + offset%>
+                      </td>
+                      <td>
+                        <%= item.title %>
+                      </td>
+                      <td>
+                        <%= item.complete ? "Done" : "Not Yet" %>
+                      </td>
+                      <td>
+                        <%= moment(item.deadline).format(" DD MMM YYYY HH:mm")%>
+                      </td>
+                      <td>
+                        <a href="/users/edit/<%= item.id%> " class="btn btn-success "><i
+                            class="fa-solid fa-pencil"></i></a>&nbsp
+                        <a href="/users/delete/<%= item.id%>" class="btn btn-danger"
+                          onclick="return on(`<%= item.id%>` , `<%= item.title%>`)"><i class="fa-solid fa-trash"></i></a>
+
+                      </td>
+
+                    </tr>
+                    <% }}) %>
+            </tbody>
+          </table>
+        </div>
+        <div class="card-footer">
+          <a href="users/add">
+            <button class="btn btn-primary" type="button"><i class="fa-solid fa-plus"></i></button>
+          </a>
+          </div>
+        </div>
+      </div>
     </div>
-    </form>
-    <div class="line"></div>
-    <div class="tab-list">
-      <table class="table table-striped">
-        <tr>
-          <th>No.</th>
-          <th><i class="fa-solid fa-sort"></i> Title</th>
-          <th><i class="fa-solid fa-sort"></i> Complete</th>
-          <th><i class="fa-solid fa-sort"></i> Deadline</th>
-          <th>Actions</th>
-        </tr>
-        </thead>
-        <tbody>
-          <%data.forEach((item,index)=>{ %>
-            <%if(new Date(`${item.deadline}`)< new Date()&& !item.complete){ %>
-              <tr>
-                <td style="background-color: #F75352; color: white;">
-                  <%= index +1 + offset%>
-                </td>
-                <td style="background-color: #F75352; color: white;">
-                  <%= item.title %>
-                </td>
-                <td style="background-color: #F75352; color: white;">
-                  <%= item.complete ? "Done" : "Not Yet" %>
-                </td>
-                <td style="background-color: #F75352; color: white;">
-                  <%= moment(item.deadline).format(" DD MMM YYYY HH:mm")%>
-                </td>
-                <td style="background-color: #F75352; color: white;">
-                  <a href="/users/edit/<%= item.id%> " class="btn btn-success update"><i
-                      class="fa-solid fa-pencil"></i></a>&nbsp <a href="/users/delete/<%= item.id%>"
-                    class="btn btn-danger delete" onclick="return on(`<%= item.id%>` , `<%= item.title%>`)"><i
-                      class="fa-solid fa-trash"></i></a>
-
-                </td>
-
-              </tr>
-              <%} else {%>
-                <tr>
-                  <td>
-                    <%= index +1 + offset%>
-                  </td>
-                  <td>
-                    <%= item.title %>
-                  </td>
-                  <td>
-                    <%= item.complete ? "Done" : "Not Yet" %>
-                  </td>
-                  <td>
-                    <%= moment(item.deadline).format(" DD MMM YYYY HH:mm")%>
-                  </td>
-                  <td>
-                    <a href="/users/edit/<%= item.id%> " class="btn btn-success "><i
-                        class="fa-solid fa-pencil"></i></a>&nbsp
-                    <a href="/users/delete/<%= item.id%>" class="btn btn-danger" onclick="return on(`<%= item.id%>` , `<%= item.title%>`)"><i
-                        class="fa-solid fa-trash"></i></a>
-
-                  </td>
-
-                </tr>
-                <% }}) %>
-        </tbody>
-      </table>
     </div>
-    <div class="card-footer">
-      <a href="users/add">
-        <button class="btn btn-primary" type="button"><i class="fa-solid fa-plus"></i></button>
-      </a>
     </div>
-  </div>
-  </div>
-  </div>
-  <%- include('partials/delete-confirm')%>
-  </body>
-  <%- include('partials/footer')%>
+    <%- include('partials/delete-confirm')%>
+      </body>
+      <%- include('partials/footer')%>

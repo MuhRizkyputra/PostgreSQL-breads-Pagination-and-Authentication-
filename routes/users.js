@@ -18,6 +18,9 @@ module.exports = function (db) {
     const params = []
     const { rows: profil } = await db.query(`SELECT * FROM "users" WHERE id = $1`, [req.session.user.userid])
     params.push(req.session.user.userid)
+
+
+
     db.query(sql, params, (err, { rows: data }) => {
       if (err) res.send(err)
       else
