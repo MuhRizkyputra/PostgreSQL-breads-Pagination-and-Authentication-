@@ -59,12 +59,13 @@ module.exports = function (db) {
     console.log('ini' , params)
     db.query(sqlcount, paramscount, (err, data) => {
       if (err) res.send(err)
+      const url = req.url == '/' ? `/?page=${page}&sortBy=${sortBy}&sortMode=${sortMode}` : req.url
       const total = data.rows[0].total
       const pages = Math.ceil(total / limit)
       db.query(sql, params, (err, { rows: data }) => {
         if (err) res.send(err)
         else
-          res.render('list', { data, query: req.query, page, pages, moment, offset, profil: profil[0] })
+          res.render('list', { data, query: req.query, page, url  , moment, offset, profil: profil[0] })
       })
     })
   })

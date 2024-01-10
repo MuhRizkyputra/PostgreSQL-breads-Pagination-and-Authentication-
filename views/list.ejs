@@ -30,8 +30,8 @@
           <div class="row mb-2">
             <label for="title" class="col-sm-2 col-form-label">Title</label>
             <div class="col-sm-10">
-              <input type="text" class="form-control" id="title" name="title" title="title" placeholder="insert your title"
-                value="<%= query.title %>">
+              <input type="text" class="form-control" id="title" name="title" title="title"
+                placeholder="insert your title" value="<%= query.title %>">
             </div>
           </div>
           <div class="row mb-1">
@@ -49,41 +49,56 @@
           <div class="row mb-3">
             <label for="complete" class="col-sm-2 col-form-label">Complete</label>
             <div class="col-sm-10">
-              <select class="form-select" aria-label="Default select example">
-                <option selected>-select complete-</option>
-                <option value="1">done</option>
-                <option value="2">not yet</option>
-              </select>
+              <% if(query.complete=='true' ) { %>
+                <select class="form-control" name="complete">
+                  <option disabled>-Select complete-</option>
+                  <option value="true" selected>Yes</option>
+                  <option value="false">Not Yet</option>
+                </select>
+                <% } else if (query.complete=='false' ) { %>
+                  <select class="form-control" name="complete">
+                    <option disabled>-select complete-</option>
+                    <br />
+                    <option value="true">Yes</option>
+                    <option value="false" selected>Not Yet</option>
+                  </select>
+                  <% } else { %>
+                    <select class="form-control" name="complete">
+                      <option disabled selected>-select complete-</option>
+                      <br />
+                      <option value="true">Done</option>
+                      <option value="false">Not Yet</option>
+                    </select>
+                    <% } %>
             </div>
             <div class="op">
               <fieldset class="row mb-3">
                 <legend class="col-form-label col-sm-2 pt-0">Operation</legend>
                 <div class="col-sm-10 rad-list">
                   <div class="operation">
-          
-                        <%if(query.mode=='OR' ){%>
-                            <input value="OR" id="or" type="radio" name="mode" checked>
-                            <label for="or">OR</label>
-                            <input value="AND" id="and" type="radio" style="margin-left: 20px;" name="mode">
-                            <label for="and">AND</label>
-                            <%}else if(query.mode=='AND' ){%>
-                                <input value="OR" id="or" type="radio" name="mode">
-                                <label for="or">OR</label>
-                                <input value="AND" id="and" type="radio" style="margin-left: 20px;" name="mode"
-                                    checked>
-                                <label for="and">AND</label>
-                                <%}else{%>
-                                    <input value="OR" id="or" type="radio" name="mode" checked>
-                                    <label for="or">OR</label>
-                                    <input value="AND" id="and" type="radio" style="margin-left: 20px;" name="mode">
-                                    <label for="and">AND</label>
-                                    <%}%>
 
+                    <%if(query.mode=='OR' ){%>
+                      <input value="OR" id="or" type="radio" name="mode" checked>
+                      <label for="or">OR</label>
+                      <input value="AND" id="and" type="radio" style="margin-left: 20px;" name="mode">
+                      <label for="and">AND</label>
+                      <%}else if(query.mode=='AND' ){%>
+                        <input value="OR" id="or" type="radio" name="mode">
+                        <label for="or">OR</label>
+                        <input value="AND" id="and" type="radio" style="margin-left: 20px;" name="mode" checked>
+                        <label for="and">AND</label>
+                        <%}else{%>
+                          <input value="OR" id="or" type="radio" name="mode" checked>
+                          <label for="or">OR</label>
+                          <input value="AND" id="and" type="radio" style="margin-left: 20px;" name="mode">
+                          <label for="and">AND</label>
+                          <%}%>
+
+                  </div>
                 </div>
             </div>
-                </div>
-              </fieldset>
-            </div>
+            </fieldset>
+          </div>
           <div class="btn-group-search">
             <div class="formBtm">
               <button class="btn btn-primary" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
@@ -161,7 +176,29 @@
         <a href="users/add">
           <button class="btn btn-primary" type="button"><i class="fa-solid fa-plus"></i></button>
         </a>
-        
+        <nav aria-label="Page navigation example">
+          <ul class="pagination">
+            <li class="page-item">
+              <a class="page-link" href="#" aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+                <span class="sr-only">Previous</span>
+              </a>
+            
+              <div class="pagination">
+                <% if(url.includes('page=')) { %>
+                    <a href="/users<%= page == 1 ? url.replace(`page=${page}`, `page=1`) : url.replace(`page=${page}`, `page=${page - 1}`) %>">&laquo;</a>
+                <% } else { %>
+                    <a href="/users/?page=1<%= url.slice(2) %>">&laquo;</a>
+                <% } %>
+                <% for(let i = 1; i <= pages; i++) { %>
+                    <a href="/users<%= url.includes('page=') ? url.replace(`page=${page}`, `page=${i}`): `/?page=${i}${'&' + url.slice(2)}` %>" class="<%= i == page? 'active' : '' %>"><%= i %></a>
+                <% } %> 
+                <% if(url.includes('page=')) { %>
+                    <a href="/users<%= page == pages ? url.replace(`page=${page}`, `page=${pages}`) : url.replace(`page=${page}`, `page=${page * 1 + 1}`) %>">&raquo;</a>
+                <% } else { %>
+                    <a href="/users/?page=2<%= url.slice(2) %>">&raquo;</a>
+                <% } %>
+            </div>
       </div>
     </div>
   </div>
