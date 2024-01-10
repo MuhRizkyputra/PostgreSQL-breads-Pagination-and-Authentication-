@@ -26,7 +26,7 @@
         </div>
       </div>
       <div class="card-body ">
-        <form action="" method="post">
+        <form action="" method="get">
           <div class="row mb-2">
             <label for="title" class="col-sm-2 col-form-label">Title</label>
             <div class="col-sm-10">
@@ -37,13 +37,13 @@
           <div class="row mb-1">
             <label for="startdate" class="col-sm-2 col-form-label">Deadline</label>
             <div class="col-sm-4">
-              <input type="date" class="form-control" name="startdate">
+              <input type="date" class="form-control" name="startdate" value="<%=query.startdate%>">
             </div>
             <label for="enddate" class="col-sm-2 col-form-label">
               <p class="into">s.d.</p>
             </label>
             <div class="col-sm-4">
-              <input type="date" class="form-control" name="enddate">
+              <input type="date" class="form-control" name="enddate" value="<%=query.date%>">
             </div>
           </div>
           <div class="row mb-3">
@@ -59,49 +59,28 @@
               <fieldset class="row mb-3">
                 <legend class="col-form-label col-sm-2 pt-0">Operation</legend>
                 <div class="col-sm-10 rad-list">
-                  <% if (query.operator == 'OR') { %>
-                  <div class="form-check">
-                    <input class="form-check-input" type="radio" name="operator" id="or" value="OR"
-                      checked>
-                    <label class="form-check-label" for="or">
-                      OR
-                    </label>
-                  </div>
-                  <div class="form-check">
-                    <input class="form-check-input" type="radio" name="operator" id="and" value="AND">
-                    <label class="form-check-label" for="and">
-                      AND
-                    </label>
-                  </div>
-                  <% } else if (query.operator == 'AND') { %>
-                    <div class="form-check">
-                      <input class="form-check-input" type="radio" name="operator" id="or" value="OR"
-                        >
-                      <label class="form-check-label" for="or">
-                        OR
-                      </label>
-                    </div>
-                    <div class="form-check">
-                      <input class="form-check-input" type="radio" name="operator" id="and" value="AND" checked>
-                      <label class="form-check-label" for="and">
-                        AND
-                      </label>
-                    </div>
-                    <% } else { %>
-                      <div class="form-check">
-                        <input class="form-check-input" type="radio" name="operator" id="or" value="OR"
-                          checked>
-                        <label class="form-check-label" for="or">
-                          OR
-                        </label>
-                      </div>
-                      <div class="form-check">
-                        <input class="form-check-input" type="radio" name="operator" id="and" value="AND">
-                        <label class="form-check-label" for="and">
-                          AND
-                        </label>
-                      </div>
-                      <% } %>
+                  <div class="operation">
+          
+                        <%if(query.mode=='OR' ){%>
+                            <input value="OR" id="or" type="radio" name="mode" checked>
+                            <label for="or">OR</label>
+                            <input value="AND" id="and" type="radio" style="margin-left: 20px;" name="mode">
+                            <label for="and">AND</label>
+                            <%}else if(query.mode=='AND' ){%>
+                                <input value="OR" id="or" type="radio" name="mode">
+                                <label for="or">OR</label>
+                                <input value="AND" id="and" type="radio" style="margin-left: 20px;" name="mode"
+                                    checked>
+                                <label for="and">AND</label>
+                                <%}else{%>
+                                    <input value="OR" id="or" type="radio" name="mode" checked>
+                                    <label for="or">OR</label>
+                                    <input value="AND" id="and" type="radio" style="margin-left: 20px;" name="mode">
+                                    <label for="and">AND</label>
+                                    <%}%>
+
+                </div>
+            </div>
                 </div>
               </fieldset>
             </div>
@@ -182,6 +161,7 @@
         <a href="users/add">
           <button class="btn btn-primary" type="button"><i class="fa-solid fa-plus"></i></button>
         </a>
+        
       </div>
     </div>
   </div>

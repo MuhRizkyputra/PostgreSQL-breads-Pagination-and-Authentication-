@@ -6,7 +6,7 @@ const path = require('path');
 
 module.exports = function (db) {
 
-  router.get('/', isLoggedIn, async (req, res,  next) => {
+  router.get('/', isLoggedIn, async (req, res, next) => {
 
     const { page = 1, title, startdate, enddate, complete, operator } = req.query;
     const limit = 5
@@ -24,22 +24,29 @@ module.exports = function (db) {
       paramscount.push(title)
     }
 
-    // if (startdate && enddate) {
-    //   queris.push(`deadline BETWEEN $${params.length + 1} and $${params.length + 2}:: TIMESTAMP + INTERVAL '1 DAY - 1 SECOND'`)
-    //   params.push(startdate,enddate)
-    //   paramscount.push(startdate,enddate)
-    // } else if (startdate) {
-    //   queris.push(`deadline >= $${params.length + 1}`)
-    //   params.push(startdate)
-    //   paramscount.push(startdate)
-    // }else if (enddate) {
-    //   queris.push(`deadline <= $${params.length + 1}:: TIMESTAMP + INTERVAL '1 DAY - 1 SECOND'`)
-    //   params,push(enddate)
-    //   paramscount.push(enddate)
-    // }
+    if (startdate && enddate) {
+      queris.push(`deadline BETWEEN $${params.length + 1} and $${params.length + 2}::TIMESTAMP + INTERVAL '1 DAY - 1 SECOND' `)
+      params.push(startdate, enddate)
+      paramscount.push(startdate, enddate)
+    } else if (startdate) {
+      queris.push(`deadline >= $${params.length + 1}`)
+      params.push(startdate)
+      paramscount.push(startdate)
+    } else if (enddate) {
+      queris.push(`deadline <= $${params.length + 1}::TIMESTAMP + INTERVAL '1 DAY - 1 SECOND'`)
+      params.push(enddate)
+      paramscount.push(enddate)
+    }
+
+    if (complete) {
+       queris.push(` complete = $${params.length +1}`)
+       params.push(complete)
+       paramscount.push(complete)
+    }
 
     let sql = 'SELECT * FROM todos WHERE userid = $1'
     let sqlcount = `SELECT COUNT (*) as total FROM todos WHERE userid = $1`
+    console.log('test', sqlcount)
 
     if (queris.length > 0) {
       sql += ` AND (${queris.join(`${operator}`)})`
@@ -48,13 +55,16 @@ module.exports = function (db) {
 
     sql += ` LIMIT $${params.length + 1} OFFSET $${params.length + 2}`
     params.push(limit, offset)
+    console.log('test' , sql)
+    console.log('ini' , params)
     db.query(sqlcount, paramscount, (err, data) => {
       if (err) res.send(err)
       const total = data.rows[0].total
       const pages = Math.ceil(total / limit)
       db.query(sql, params, (err, { rows: data }) => {
-        if (err) return res.send(err)
-          res.render('list', { data, query: req.query, moment, pages, page, offset, profil: profil[0] })
+        if (err) res.send(err)
+        else
+          res.render('list', { data, query: req.query, page, pages, moment, offset, profil: profil[0] })
       })
     })
   })
