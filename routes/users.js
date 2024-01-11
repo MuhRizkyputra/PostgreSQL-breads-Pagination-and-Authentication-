@@ -15,6 +15,8 @@ module.exports = function (db) {
     const paramscount = []
     const offset = (page - 1) * limit
     const { rows: profil } = await db.query(`SELECT * FROM "users" WHERE id = $1`, [req.session.user.userid])
+    const sortBy = ['title', 'complete', 'deadline'].includes(req.query.sortBy) ? req.query.sortBy : 'id'
+    const sortMode = req.query.sortMode === 'asc' ? 'asc' : 'desc';
     params.push(req.session.user.userid)
     paramscount.push(req.session.user.userid)
 
@@ -65,7 +67,7 @@ module.exports = function (db) {
       db.query(sql, params, (err, { rows: data }) => {
         if (err) res.send(err)
         else
-          res.render('list', { data, query: req.query, page, url  , moment, offset, profil: profil[0] })
+          res.render('list', { data, query: req.query, pages ,page, url  , moment, offset, sortMode , sortBy, profil: profil[0] })
       })
     })
   })

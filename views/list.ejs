@@ -27,173 +27,183 @@
       </div>
       <div class="card-body ">
         <form action="" method="get">
-          <div class="row mb-2">
-            <label for="title" class="col-sm-2 col-form-label">Title</label>
-            <div class="col-sm-10">
-              <input type="text" class="form-control" id="title" name="title" title="title"
-                placeholder="insert your title" value="<%= query.title %>">
+          <input type="hidden" name="page" value="1">
+          <input type="hidden" name="sortBy" value="id">
+          <input type="hidden" name="sortMode" value="asc">
+          <div class="inline">
+            <div class="row mb-2">
+              <label for="title" class="col-sm-2 col-form-label">Title</label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" id="title" name="title" title="title"
+                  placeholder="insert your title" value="<%= query.title %>">
+              </div>
             </div>
-          </div>
-          <div class="row mb-1">
-            <label for="startdate" class="col-sm-2 col-form-label">Deadline</label>
-            <div class="col-sm-4">
-              <input type="date" class="form-control" name="startdate" value="<%=query.startdate%>">
+            <div class="row mb-1">
+              <label for="startdate" class="col-sm-2 col-form-label">Deadline</label>
+              <div class="col-sm-4">
+                <input type="date" class="form-control" name="startdate" value="<%=query.startdate%>">
+              </div>
+              <label for="enddate" class="col-sm-2 col-form-label">
+                <p class="into">s.d.</p>
+              </label>
+              <div class="col-sm-4">
+                <input type="date" class="form-control" name="enddate" value="<%=query.date%>">
+              </div>
             </div>
-            <label for="enddate" class="col-sm-2 col-form-label">
-              <p class="into">s.d.</p>
-            </label>
-            <div class="col-sm-4">
-              <input type="date" class="form-control" name="enddate" value="<%=query.date%>">
-            </div>
-          </div>
-          <div class="row mb-3">
-            <label for="complete" class="col-sm-2 col-form-label">Complete</label>
-            <div class="col-sm-10">
-              <% if(query.complete=='true' ) { %>
-                <select class="form-control" name="complete">
-                  <option disabled>-Select complete-</option>
-                  <option value="true" selected>Yes</option>
-                  <option value="false">Not Yet</option>
-                </select>
-                <% } else if (query.complete=='false' ) { %>
+            <div class="row mb-3">
+              <label for="complete" class="col-sm-2 col-form-label">Complete</label>
+              <div class="col-sm-10">
+                <% if(query.complete=='true' ) { %>
                   <select class="form-control" name="complete">
-                    <option disabled>-select complete-</option>
-                    <br />
-                    <option value="true">Yes</option>
-                    <option value="false" selected>Not Yet</option>
+                    <option disabled>-Select complete-</option>
+                    <option value="true" selected>Yes</option>
+                    <option value="false">Not Yet</option>
                   </select>
-                  <% } else { %>
+                  <% } else if (query.complete=='false' ) { %>
                     <select class="form-control" name="complete">
-                      <option disabled selected>-select complete-</option>
+                      <option disabled>-select complete-</option>
                       <br />
-                      <option value="true">Done</option>
-                      <option value="false">Not Yet</option>
+                      <option value="true">Yes</option>
+                      <option value="false" selected>Not Yet</option>
                     </select>
-                    <% } %>
-            </div>
-            <div class="op">
-              <fieldset class="row mb-3">
-                <legend class="col-form-label col-sm-2 pt-0">Operation</legend>
-                <div class="col-sm-10 rad-list">
-                  <div class="operation">
+                    <% } else { %>
+                      <select class="form-control" name="complete">
+                        <option disabled selected>-select complete-</option>
+                        <br />
+                        <option value="true">Done</option>
+                        <option value="false">Not Yet</option>
+                      </select>
+                      <% } %>
+              </div>
+              <div class="op">
+                <fieldset class="row mb-3">
+                  <legend class="col-form-label col-sm-2 pt-0">Operation</legend>
+                  <div class="col-sm-10 rad-list">
+                    <div class="operation">
 
-                    <%if(query.mode=='OR' ){%>
-                      <input value="OR" id="or" type="radio" name="mode" checked>
-                      <label for="or">OR</label>
-                      <input value="AND" id="and" type="radio" style="margin-left: 20px;" name="mode">
-                      <label for="and">AND</label>
-                      <%}else if(query.mode=='AND' ){%>
-                        <input value="OR" id="or" type="radio" name="mode">
+                      <%if(query.mode=='OR' ){%>
+                        <input value="OR" id="or" type="radio" name="mode" checked>
                         <label for="or">OR</label>
-                        <input value="AND" id="and" type="radio" style="margin-left: 20px;" name="mode" checked>
+                        <input value="AND" id="and" type="radio" style="margin-left: 20px;" name="mode">
                         <label for="and">AND</label>
-                        <%}else{%>
-                          <input value="OR" id="or" type="radio" name="mode" checked>
+                        <%}else if(query.mode=='AND' ){%>
+                          <input value="OR" id="or" type="radio" name="mode">
                           <label for="or">OR</label>
-                          <input value="AND" id="and" type="radio" style="margin-left: 20px;" name="mode">
+                          <input value="AND" id="and" type="radio" style="margin-left: 20px;" name="mode" checked>
                           <label for="and">AND</label>
-                          <%}%>
+                          <%}else{%>
+                            <input value="OR" id="or" type="radio" name="mode" checked>
+                            <label for="or">OR</label>
+                            <input value="AND" id="and" type="radio" style="margin-left: 20px;" name="mode">
+                            <label for="and">AND</label>
+                            <%}%>
 
+                    </div>
                   </div>
-                </div>
+              </div>
+              </fieldset>
             </div>
-            </fieldset>
-          </div>
-          <div class="btn-group-search">
-            <div class="formBtm">
-              <button class="btn btn-primary" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
-              <a href="/users">
-                <button class="btn btn-warning" type="button"><i class="fa-solid fa-arrows-rotate"></i></button>
-              </a>
+            <div class="btn-group-search">
+              <div class="formBtm">
+                <button class="btn btn-primary" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+                <a href="/users">
+                  <button class="btn btn-warning" type="button"><i class="fa-solid fa-arrows-rotate"></i></button>
+                </a>
+              </div>
             </div>
           </div>
-      </div>
-      </form>
-      <div class="line"></div>
-      <div class="tab-list">
-        <table class="table table-striped">
-          <tr>
-            <th>No.</th>
-            <th><i class="fa-solid fa-sort"></i> Title</th>
-            <th><i class="fa-solid fa-sort"></i> Complete</th>
-            <th><i class="fa-solid fa-sort"></i> Deadline</th>
-            <th>Actions</th>
-          </tr>
-          </thead>
-          <tbody>
-            <%data.forEach((item,index)=>{ %>
-              <%if(new Date(`${item.deadline}`)< new Date()&& !item.complete){ %>
-                <tr>
-                  <td style="background-color: #F75352; color: white;">
-                    <%= index +1 + offset%>
-                  </td>
-                  <td style="background-color: #F75352; color: white;">
-                    <%= item.title %>
-                  </td>
-                  <td style="background-color: #F75352; color: white;">
-                    <%= item.complete ? "Done" : "Not Yet" %>
-                  </td>
-                  <td style="background-color: #F75352; color: white;">
-                    <%= moment(item.deadline).format(" DD MMM YYYY HH:mm")%>
-                  </td>
-                  <td style="background-color: #F75352; color: white;">
-                    <a href="/users/edit/<%= item.id%> " class="btn btn-success update"><i
-                        class="fa-solid fa-pencil"></i></a>&nbsp <a href="/users/delete/<%= item.id%>"
-                      class="btn btn-danger delete" onclick="return on(`<%= item.id%>` , `<%= item.title%>`)"><i
-                        class="fa-solid fa-trash"></i></a>
+        </form>
+        <div class="table">
 
-                  </td>
-
-                </tr>
-                <%} else {%>
+          <table>
+              <thead>
                   <tr>
-                    <td>
+                      <th>No.</th>
+                          <th><a href="/users<%= url.replace(`sortBy=${sortBy}`, `sortBy=title`).replace(`sortMode=${sortMode}`,`sortMode=${sortMode == 'asc' ? 'desc' : 'asc'}`)%>"
+                              style="color: black;"><i
+                                  class="fa-solid fa-<%= sortBy == 'title' ? sortMode == 'asc' ? 'sort-up' : 'sort-down' : 'sort'%>"></i></a>&nbsp;Title
+                      </th>
+                      <th><a href="/users<%= url.replace(`sortBy=${sortBy}`, `sortBy=complete`).replace(`sortMode=${sortMode}`,`sortMode=${sortMode == 'asc' ? 'desc' : 'asc'}`)%>"
+                              style="color: black;"><i
+                                  class="fa-solid fa-<%= sortBy == 'complete' ? sortMode == 'asc' ? 'sort-up' : 'sort-down' : 'sort'%>"></i></a>&nbsp;Complete
+                              </th>
+                      <th><a href="/users<%= url.replace(`sortBy=${sortBy}`, `sortBy=deadline`).replace(`sortMode=${sortMode}`,`sortMode=${sortMode == 'asc' ? 'desc' : 'asc'}`)%>"
+                              style="color: black;"><i
+                                  class="fa-solid fa-<%= sortBy == 'deadline' ? sortMode == 'asc' ? 'sort-up' : 'sort-down' : 'sort'%>"></i></a>&nbsp;Deadline
+                              </th>
+                      <th>Action</th>
+                  </tr>
+
+              </thead>
+              <tbody>
+              <%data.forEach((item,index)=>{ %>
+                <%if(new Date(`${item.deadline}`)< new Date()&& !item.complete){ %>
+                  <tr>
+                    <td style="background-color: #F75352; color: white;">
                       <%= index +1 + offset%>
                     </td>
-                    <td>
+                    <td style="background-color: #F75352; color: white;">
                       <%= item.title %>
                     </td>
-                    <td>
+                    <td style="background-color: #F75352; color: white;">
                       <%= item.complete ? "Done" : "Not Yet" %>
                     </td>
-                    <td>
+                    <td style="background-color: #F75352; color: white;">
                       <%= moment(item.deadline).format(" DD MMM YYYY HH:mm")%>
                     </td>
-                    <td>
-                      <a href="/users/edit/<%= item.id%> " class="btn btn-success "><i
-                          class="fa-solid fa-pencil"></i></a>&nbsp
-                      <a href="/users/delete/<%= item.id%>" class="btn btn-danger"
-                        onclick="return on(`<%= item.id%>` , `<%= item.title%>`)"><i class="fa-solid fa-trash"></i></a>
+                    <td style="background-color: #F75352; color: white;">
+                      <a href="/users/edit/<%= item.id%> " class="btn btn-success update"><i
+                          class="fa-solid fa-pencil"></i></a>&nbsp <a href="/users/delete/<%= item.id%>"
+                        class="btn btn-danger delete" onclick="return on(`<%= item.id%>` , `<%= item.title%>`)"><i
+                          class="fa-solid fa-trash"></i></a>
 
                     </td>
 
                   </tr>
-                  <% }}) %>
-          </tbody>
-        </table>
-      </div>
-      <div class="card-footer">
-        <a href="users/add">
-          <button class="btn btn-primary" type="button"><i class="fa-solid fa-plus"></i></button>
-        </a>
-        <nav aria-label="Page navigation example">
-          <ul class="pagination">
-            <li class="page-item">
-              <a class="page-link" href="#" aria-label="Previous">
-                <span aria-hidden="true">&laquo;</span>
-                <span class="sr-only">Previous</span>
-              </a>
-            
-              <div class="pagination">
-                <% if(url.includes('page=')) { %>
+                  <%} else {%>
+                    <tr>
+                      <td>
+                        <%= index +1 + offset%>
+                      </td>
+                      <td>
+                        <%= item.title %>
+                      </td>
+                      <td>
+                        <%= item.complete ? "Done" : "Not Yet" %>
+                      </td>
+                      <td>
+                        <%= moment(item.deadline).format(" DD MMM YYYY HH:mm")%>
+                      </td>
+                      <td>
+                        <a href="/users/edit/<%= item.id%> " class="btn btn-success "><i
+                            class="fa-solid fa-pencil"></i></a>&nbsp
+                        <a href="/users/delete/<%= item.id%>" class="btn btn-danger"
+                          onclick="return on(`<%= item.id%>` , `<%= item.title%>`)"><i
+                            class="fa-solid fa-trash"></i></a>
+
+                      </td>
+
+                    </tr>
+                    <% }}) %>
+            </tbody>
+          </table>
+        </div>
+        <div class="card-footer">
+          <a href="users/add">
+            <button class="btn btn-primary" type="button"><i class="fa-solid fa-plus"></i></button>
+          </a>
+          <div class="pagination">
+            <% if(url.includes('page=')) { %>
                     <a href="/users<%= page == 1 ? url.replace(`page=${page}`, `page=1`) : url.replace(`page=${page}`, `page=${page - 1}`) %>">&laquo;</a>
                 <% } else { %>
                     <a href="/users/?page=1<%= url.slice(2) %>">&laquo;</a>
                 <% } %>
                 <% for(let i = 1; i <= pages; i++) { %>
-                    <a href="/users<%= url.includes('page=') ? url.replace(`page=${page}`, `page=${i}`): `/?page=${i}${'&' + url.slice(2)}` %>" class="<%= i == page? 'active' : '' %>"><%= i %></a>
-                <% } %> 
-                <% if(url.includes('page=')) { %>
+                    <a href="/users<%= url.includes('
+              page=') ? url.replace(`page=${page}`, `page=${i}`): `/?page=${i}${' &' + url.slice(2)}` %>" class="<%=
+                i==page? 'active' : '' %>"><%= i %></a>
+                  <% } %>
+                    <% if(url.includes('page=')) { %>
                     <a href="/users<%= page == pages ? url.replace(`page=${page}`, `page=${pages}`) : url.replace(`page=${page}`, `page=${page * 1 + 1}`) %>">&raquo;</a>
                 <% } else { %>
                     <a href="/users/?page=2<%= url.slice(2) %>">&raquo;</a>
@@ -205,6 +215,6 @@
   </div>
   </div>
   </div>
-  <%- include('partials/delete-confirm')%>
-    </body>
-    <%- include('partials/footer')%>
+  <%- include(' partials/delete-confirm')%>
+                      </body>
+                      <%- include('partials/footer')%>
