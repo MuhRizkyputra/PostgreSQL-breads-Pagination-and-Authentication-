@@ -229,3 +229,34 @@ margin-right: 15px;
   border: 1px solid #ddd;
   border-left: none;
 }
+
+.table {
+  background-color: white;
+  padding: 25px 0px 10px;
+}
+
+table {
+  width: 100%;
+  text-align: left;
+  border-collapse: collapse;
+  border-style: none;
+}
+tbody, td, tfoot, th, thead, tr {
+  border-color: inherit;
+  border-style: none;
+  border-width: 0;
+}
+.sort a {
+  color: black;
+}
+
+th,
+td {
+  padding: 10px 15px;
+  
+}
+
+tbody tr:nth-child(odd) {
+  background-color: whitesmoke;
+ 
+}

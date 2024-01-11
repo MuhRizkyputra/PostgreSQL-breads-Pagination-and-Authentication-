@@ -30,7 +30,7 @@
           <input type="hidden" name="page" value="1">
           <input type="hidden" name="sortBy" value="id">
           <input type="hidden" name="sortMode" value="asc">
-          <div class="inline">
+        
             <div class="row mb-2">
               <label for="title" class="col-sm-2 col-form-label">Title</label>
               <div class="col-sm-10">
@@ -194,27 +194,25 @@
           </a>
           <div class="pagination">
             <% if(url.includes('page=')) { %>
-                    <a href="/users<%= page == 1 ? url.replace(`page=${page}`, `page=1`) : url.replace(`page=${page}`, `page=${page - 1}`) %>">&laquo;</a>
-                <% } else { %>
-                    <a href="/users/?page=1<%= url.slice(2) %>">&laquo;</a>
-                <% } %>
-                <% for(let i = 1; i <= pages; i++) { %>
-                    <a href="/users<%= url.includes('
-              page=') ? url.replace(`page=${page}`, `page=${i}`): `/?page=${i}${' &' + url.slice(2)}` %>" class="<%=
-                i==page? 'active' : '' %>"><%= i %></a>
-                  <% } %>
-                    <% if(url.includes('page=')) { %>
-                    <a href="/users<%= page == pages ? url.replace(`page=${page}`, `page=${pages}`) : url.replace(`page=${page}`, `page=${page * 1 + 1}`) %>">&raquo;</a>
-                <% } else { %>
-                    <a href="/users/?page=2<%= url.slice(2) %>">&raquo;</a>
-                <% } %>
-            </div>
+                <a href="/users<%= page == 1 ? url.replace(`page=${page}`, `page=1`) : url.replace(`page=${page}`, `page=${page - 1}`) %>">&laquo;</a>
+            <% } else { %>
+                <a href="/users/?page=1<%= url.slice(2) %>">&laquo;</a>
+            <% } %>
+            <% for(let i = 1; i <= pages; i++) { %>
+                <a href="/users<%= url.includes('page=') ? url.replace(`page=${page}`, `page=${i}`): `/?page=${i}${'&' + url.slice(2)}` %>" class="<%= i == page? 'active' : '' %>"><%= i %></a>
+            <% } %> 
+            <% if(url.includes('page=')) { %>
+                <a href="/users<%= page == pages ? url.replace(`page=${page}`, `page=${pages}`) : url.replace(`page=${page}`, `page=${page * 1 + 1}`) %>">&raquo;</a>
+            <% } else { %>
+                <a href="/users/?page=2<%= url.slice(2) %>">&raquo;</a>
+            <% } %>
+        </div>
       </div>
     </div>
   </div>
   </div>
   </div>
   </div>
-  <%- include(' partials/delete-confirm')%>
+  <%- include('partials/delete-confirm')%>
                       </body>
                       <%- include('partials/footer')%>

@@ -48,17 +48,17 @@ module.exports = function (db) {
 
     let sql = 'SELECT * FROM todos WHERE userid = $1'
     let sqlcount = `SELECT COUNT (*) as total FROM todos WHERE userid = $1`
-    console.log('test', sqlcount)
 
     if (queris.length > 0) {
       sql += ` AND (${queris.join(`${operator}`)})`
       sqlcount += ` AND (${queris.join(`${operator}`)})`
     }
 
+    sql += ` ORDER BY ${sortBy} ${sortMode}`
+
     sql += ` LIMIT $${params.length + 1} OFFSET $${params.length + 2}`
     params.push(limit, offset)
-    console.log('test' , sql)
-    console.log('ini' , params)
+  
     db.query(sqlcount, paramscount, (err, data) => {
       if (err) res.send(err)
       const url = req.url == '/' ? `/?page=${page}&sortBy=${sortBy}&sortMode=${sortMode}` : req.url
