@@ -7,12 +7,12 @@ const saltRounds = 10;
 module.exports = function (db) {
 
   router.get('/', (req, res) => {
-    res.render('users/index' , { errorMessage: req.flash('errorMessage'), successMessage: req.flash('successMessage') })
+    res.render('users/index', { errorMessage: req.flash('errorMessage'), successMessage: req.flash('successMessage') })
   });
 
   router.post('/', async (req, res) => {
 
-     try {
+    try {
       const { email, password } = req.body
       const { rows } = await db.query('SELECT * FROM users WHERE email = $1', [email])
 
@@ -55,7 +55,7 @@ module.exports = function (db) {
         req.flash('errorMessage', `Email already exist`)
         res.redirect('/register')
         return
-      }      
+      }
 
       const hash = bcrypt.hashSync(password, saltRounds);
       const { rows: users } = await db.query('INSERT INTO users(email, password) VALUES ($1, $2) returning *', [email, hash])
@@ -71,7 +71,9 @@ module.exports = function (db) {
 
   router.get('/logout', function (req, res) {
     req.session.destroy(function (err) {
+      res.redirect('/')
     })
   })
   return router
+
 }

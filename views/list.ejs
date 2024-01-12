@@ -4,7 +4,7 @@
       <div class="container-ava bg-light">
         <div class="item-ava">
           <div class="ava">
-            <a href="users/upload"><img src="<%= profil.avatar ? `/images/${profil.avatar}` : `../images/avatar.png` %>"
+            <a href="/users/upload"><img src="<%= profil.avatar ? `/images/${profil.avatar}` : `../images/avatar.png` %>"
                 alt="avatar" class="avatar"></a>
             <h2>
               <%= profil.email%>
@@ -12,7 +12,7 @@
           </div>
           <div class="btn-out">
             <div class="position-relative">
-              <a href="/">
+              <a href="/logout">
                 <button type="button" class="btn btn-secondary"><i class="fa-solid fa-right-from-bracket"></i>Sign
                   Out</button>
               </a>
@@ -29,7 +29,7 @@
         <form action="" method="get">
           <input type="hidden" name="page" value="1">
           <input type="hidden" name="sortBy" value="id">
-          <input type="hidden" name="sortMode" value="asc">
+          <input type="hidden" name="sortDeadline" value="asc">
         
             <div class="row mb-2">
               <label for="title" class="col-sm-2 col-form-label">Title</label>
@@ -79,29 +79,22 @@
                 <fieldset class="row mb-3">
                   <legend class="col-form-label col-sm-2 pt-0">Operation</legend>
                   <div class="col-sm-10 rad-list">
-                    <div class="operation">
-
-                      <%if(query.mode=='OR' ){%>
-                        <input value="OR" id="or" type="radio" name="mode" checked>
-                        <label for="or">OR</label>
-                        <input value="AND" id="and" type="radio" style="margin-left: 20px;" name="mode">
-                        <label for="and">AND</label>
-                        <%}else if(query.mode=='AND' ){%>
-                          <input value="OR" id="or" type="radio" name="mode">
-                          <label for="or">OR</label>
-                          <input value="AND" id="and" type="radio" style="margin-left: 20px;" name="mode" checked>
-                          <label for="and">AND</label>
-                          <%}else{%>
-                            <input value="OR" id="or" type="radio" name="mode" checked>
-                            <label for="or">OR</label>
-                            <input value="AND" id="and" type="radio" style="margin-left: 20px;" name="mode">
-                            <label for="and">AND</label>
-                            <%}%>
-
+                    <div class="form-check">
+                      <input class="form-check-input" type="radio" name="operator" id="or" value="OR" <% if
+                        (query.operator !=='AND' ) { %> checked <% } %>>
+                        <label class="form-check-label" for="or">
+                          OR
+                        </label>
+                    </div>
+                    <div class="form-check">
+                      <input class="form-check-input" type="radio" name="operator" id="and" value="AND" <% if
+                        (query.operator=='AND' ) { %> checked <% } %>>
+                        <label class="form-check-label" for="and">
+                          AND
+                        </label>
                     </div>
                   </div>
-              </div>
-              </fieldset>
+                </fieldset>
             </div>
             <div class="btn-group-search">
               <div class="formBtm">
@@ -189,7 +182,7 @@
           </table>
         </div>
         <div class="card-footer">
-          <a href="users/add">
+          <a href="/users/add">
             <button class="btn btn-primary" type="button"><i class="fa-solid fa-plus"></i></button>
           </a>
           <div class="pagination">

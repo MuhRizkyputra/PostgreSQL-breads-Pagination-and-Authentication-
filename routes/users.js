@@ -41,7 +41,7 @@ module.exports = function (db) {
     }
 
     if (complete) {
-       queris.push(` complete = $${params.length +1}`)
+       queris.push(` complete = $${params.length +1} `)
        params.push(complete)
        paramscount.push(complete)
     }
@@ -50,8 +50,8 @@ module.exports = function (db) {
     let sqlcount = `SELECT COUNT (*) as total FROM todos WHERE userid = $1`
 
     if (queris.length > 0) {
-      sql += ` AND (${queris.join(`${operator}`)})`
-      sqlcount += ` AND (${queris.join(`${operator}`)})`
+      sql += ` AND (${queris.join(`${operator} `)})`
+      sqlcount += ` AND (${queris.join(`${operator} `)})`
     }
 
     sql += ` ORDER BY ${sortBy} ${sortMode}`
